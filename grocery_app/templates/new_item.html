@@ -1,30 +1,17 @@
+<!DOCTYPE html>
 {% extends 'base.html' %}
 {% block content %}
 
 <h1>New Item</h1>
 
 <form method="POST">
-    {{ form.hidden_tag() }}
     <fieldset>
         <legend>Please enter your information:</legend>
 
+        {% include '_grocery_item_form.html' %}
+
         <div>
-            {{ form.name.label }} {{ form.name }}
-        </div>
-        <div>
-            {{ form.price.label }} {{ form.price }}
-        </div>
-        <div>
-            {{ form.category.label }} {{ form.category }}
-        </div>
-        <div>
-            {{ form.photo_url.label }} {{ form.photo_url }}
-        </div>
-        <div>
-            {{ form.store.label }} {{ form.store }}
-        </div>
-        <div>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Update">
         </div>
     </fieldset>
 </form>

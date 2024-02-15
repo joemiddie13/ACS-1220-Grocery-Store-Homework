@@ -1,19 +1,15 @@
+<!DOCTYPE html>
 {% extends 'base.html' %}
 {% block content %}
 
 <h1>New Store</h1>
 
 <form method="POST">
-    {{ form.hidden_tag() }}
     <fieldset>
         <legend>Please enter your information:</legend>
 
-        <div>
-            {{ form.title.label }} {{ form.title }}
-        </div>
-        <div>
-            {{ form.address.label }} {{ form.address }}
-        </div>
+        {% include '_grocery_store_form.html' %}
+
         <div>
             <input type="submit" value="Submit">
         </div>
