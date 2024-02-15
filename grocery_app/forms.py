@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Optional, URL
 from wtforms_sqlalchemy.fields import QuerySelectField
 from grocery_app.models import GroceryStore
 
-def store_query()
+def store_query():
     return GroceryStore.query
 
 class GroceryStoreForm(FlaskForm):
