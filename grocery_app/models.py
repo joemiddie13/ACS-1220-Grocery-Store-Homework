@@ -1,12 +1,17 @@
 from sqlalchemy_utils import URLType
-
+from .extensions import db
 from grocery_app.extensions import db
 from grocery_app.utils import FormEnum
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
+
+    @property
+    def is_active(self):
+        return True
 
 class ItemCategory(FormEnum):
     """Categories of grocery items."""

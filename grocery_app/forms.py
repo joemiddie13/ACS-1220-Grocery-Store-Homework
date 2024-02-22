@@ -1,4 +1,4 @@
-import bcrypt
+from grocery_app import bcrypt
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, FloatField, SelectField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, Optional, URL
@@ -48,6 +48,5 @@ class LoginForm(FlaskForm):
 
     def validate_password(self, password):
         user = User.query.filter_by(username=self.username.data).first()
-        if user and not bcrypt.check_password_hash(
-                user.password, password.data):
-            raise ValidationError('Password doesn\'t match. Please try again.')
+        if user and not bcrypt.check_password_hash(user.password, password.data):
+            raise ValidationError('Login unsuccessful. Please check your username and password.')
