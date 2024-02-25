@@ -18,6 +18,7 @@
                     <a href="/new_item">New Item</a>
                     {% if current_user.is_authenticated %}
                         <span>Welcome, {{ current_user.username }}!</span>
+                        <a href="{{ url_for('main.shopping_list') }}">Shopping List</a>
                         <a href="/logout">Logout</a>
                     {% else %}
                         <a href="/signup">Sign Up</a>

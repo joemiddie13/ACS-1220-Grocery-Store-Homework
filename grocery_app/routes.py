@@ -118,3 +118,31 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('main.homepage'))
+
+@main.route('/add_to_shopping_list/<item_id>', methods=['POST'])
+@login_required
+def add_to_shopping_list(item_id):
+    item = GroceryItem.query.get(item_id)
+    if item not in current_user.shopping_list_items:
+        current_user.shopping_list_items.append(item)
+        db.session.commit()
+        flash('Item added to your shopping list!', 'success')
+    return redirect(url_for('main.item_detail', item_id=item.id))
+
+@main.route('/shopping_list')
+@login_required
+def shopping_list():
+    shopping_list_items = current_user.shopping_list_items
+    return render_template('shopping_list.html', shopping_list_items=shopping_list_items)
+
+@main.route('/delete_item/<item_id>', methods=['POST'])
+@login_required
+def delete_item(item_id):
+    item = GroceryItem.query.get(item_id)
+    if item in current_user.shopping_list_items:
+        current_user.shopping_list_items.remove(item)
+        db.session.commit()
+        flash('Item removed from your shopping list!', 'success')
+    else:
+        flash('Item not found in your shopping list!', 'error')
+    return redirect(url_for('main.shopping_list'))

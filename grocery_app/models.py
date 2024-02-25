@@ -4,10 +4,21 @@ from grocery_app.extensions import db
 from grocery_app.utils import FormEnum
 from flask_login import UserMixin
 
+shopping_list_items = db.Table('shopping_list_items',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('item_id', db.Integer, db.ForeignKey('grocery_item.id'))
+)
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
+
+    shopping_list_items = db.relationship(
+        'GroceryItem',
+        secondary=shopping_list_items,
+        backref=db.backref('users', lazy='dynamic')
+    )
 
     @property
     def is_active(self):

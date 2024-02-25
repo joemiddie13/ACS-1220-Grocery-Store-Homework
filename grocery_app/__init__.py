@@ -20,7 +20,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Initialize extensions
-db = SQLAlchemy(app)  # Add the missing import statement and initialize the db object
+db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.init_app(app)
