@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>Item - {{ item.name }}</h1>
+<p>Added by: {{ item.created_by.username }}</p>
 
 <p><img src="{{ item.photo_url }}" width="250px" height="250px"></p>
 
